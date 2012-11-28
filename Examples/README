@@ -1,0 +1,22 @@
+MusKit Examples Readme - Created 12/15/09 by Adam Somers
+
+This project contains several targets to demonstrate some of MusKit's features.
+Set the active target to the example you want to try.
+
+
+sig-gen: generates a sine wave at 440Hz
+
+fm: generates a sine wave with vibrato
+
+plucky: a polyphonic karplus-strong MIDI instrument.  Plucky will check for midi
+devices and will automatically use one if you only have one connected.  If you 
+have more than one connected, you will be shown a list of midi devices and 
+prompted to select one.
+
+You can also play plucky by typing on your computer's keyboard.  The chromatic 
+scale is laid out as follows:
+
+         w e   t y u
+        a s d f g h j k
+
+The numbers (1-9) select the octave.
