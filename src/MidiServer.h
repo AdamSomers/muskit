@@ -2,6 +2,7 @@
 #define h_MidiServer
 
 #include "RtMidi.h"
+#include <cassert>
 
 //#define qVerbose 1
 

@@ -93,7 +93,7 @@ void AudioServer::AddClient(AudioClient* c, int channelIndex)
 	ChannelClientMap::iterator clientListIter = fChannelClientMap.find(channelIndex);
 	if (clientListIter == fChannelClientMap.end())
 	{
-		fChannelClientMap.insert(std::make_pair<int, AudioClientList>(channelIndex, AudioClientList()));
+		fChannelClientMap.insert(std::make_pair<int, AudioClientList>((int)channelIndex, AudioClientList()));
 		clientListIter = fChannelClientMap.find(channelIndex);
 	}
 	

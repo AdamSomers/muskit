@@ -1,10 +1,10 @@
- #ifndef h_Poly
+#ifndef h_Poly
 #define h_Poly
 
 #include "AudioClient.h"
-#include "MidiServer.h"
-
+//#include "MidiServer.h"
 #include <deque>
+#include <map>
 
 // Voice
 // ----------------
@@ -61,7 +61,7 @@ protected:
 //
 //
 class Poly : public AudioClient
-           , public MidiClient
+           //, public MidiClient
 {
 public:
 	Poly() {}
