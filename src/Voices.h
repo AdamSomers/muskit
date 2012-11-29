@@ -3,6 +3,8 @@
 
 #include "Poly.h"
 #include "MathHelpers.h"
+#include "AudioServer.h"
+#include "Interpolators.h"
 
 // Karplus
 // ----------------
@@ -45,7 +47,7 @@ public:
       }
    }
    
-   void NoteOn(int note, int velocity)
+   void NoteOn(int note, int velocity, float* buffer = NULL, int bufferSize = 0)
    {
       Voice::NoteOn(note, velocity);
       
@@ -62,7 +64,10 @@ public:
       fFeedback = 0.99f;
       fGain = velocity / 127.f;
       
-      this->Excite();
+      if (!buffer)
+        this->Excite();
+      else
+        this->Excite(buffer, bufferSize);
    }
    
    void NoteOff()
@@ -105,6 +110,18 @@ public:
       }
    }
    
+    
+    void Excite(float* buffer, int bufferSize)
+    {
+        Interpolator jake(Interpolator::kInterpolationTypeLinear);
+        for (int i = 0; i < fBufferSize; ++i)
+        {
+            float index = (i / (float)fBufferSize) * bufferSize;
+            float val = jake.Interpolate(buffer, index, bufferSize);
+            fBuffer[(fR + i) & (fMaxSize - 1)] = val;
+        }
+    }
+    
 private:
    float* fBuffer;
    float fMaxTime;
