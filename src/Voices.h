@@ -116,9 +116,18 @@ public:
         Interpolator jake(Interpolator::kInterpolationTypeLinear);
         for (int i = 0; i < fBufferSize; ++i)
         {
+            float R1 = (float) rand() / (float) RAND_MAX;
+            float R2 = (float) rand() / (float) RAND_MAX;
+            
+            float randVal = tanh((float) sqrt( -2.0f * log( R1 )) * cos( 2.0f * PI * R2 ));
+            
             float index = (i / (float)fBufferSize) * bufferSize;
             float val = jake.Interpolate(buffer, index, bufferSize);
-            fBuffer[(fR + i) & (fMaxSize - 1)] = val;
+            int w = (fR + i) & (fMaxSize - 1);
+            float newVal = fBuffer[w] + val + randVal * .05;
+            if (newVal > 1) newVal = 1;
+            if (newVal < -1) newVal = -1;
+            fBuffer[w] = newVal;
         }
     }
     
