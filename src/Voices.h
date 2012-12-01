@@ -113,6 +113,22 @@ public:
     
     void Excite(float* buffer, int bufferSize)
     {
+        float peak = 0.f;
+        for (int i = 0; i < fBufferSize; ++i)
+        {
+            float val = fabsf(fBuffer[i]);
+            if (val > peak)
+                peak = val;
+        }
+        
+        if (peak > 1)
+            peak = 1.f;
+        
+        for (int i = 0; i < bufferSize; ++i)
+        {
+            buffer[i] *= 1.f - peak;
+        }
+        
         Interpolator jake(Interpolator::kInterpolationTypeLinear);
         for (int i = 0; i < fBufferSize; ++i)
         {
