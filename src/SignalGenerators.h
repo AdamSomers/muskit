@@ -675,6 +675,138 @@ private:
 	float fConst;
 };
 
+// StateVariable
+// ----------------
+/// \brief StateVariable implements a filter with LP, HP, BP & Notch modes
+///
+/// 
+//
+class StateVariable : public AudioClient
+{
+public:
+	StateVariable(AudioClient* input = NULL)
+	: fInput(input),
+    _sr(44100.f),
+    _freq(1000.f),
+    _freqZ(1000.f),
+    _res(0),
+    _q(2.f),
+    _f(0.f),
+    _type(kOff)
+    {
+        reset();
+        setType(2);
+        _updateCoefficient();
+        _updateQ();
+    }
+    
+    enum Type
+    {
+        kOff = 0,
+        kLowpass,
+        kHighpass,
+        kBandpass,
+        kNotch,
+        kNumFilterTypes
+    };
+	
+	void Render(float* buffer, int frames)
+	{
+		if (fInput)
+		{
+            fInput->Process(buffer, frames);
+            for (int i = 0; i < frames; ++i)
+            {
+                float input = buffer[i];
+                _low = _low + _f * _band;
+                _high = input - _low - _q * _band;
+                _band = tanh(_f * _high + _band);
+                _notch = _low + _high;
+                if (_freqZ != _freq) {
+                    _freqZ = 0.9999 * _freqZ + 0.0001 * _freq;
+                    _updateCoefficient();
+                }
+                buffer[i] = _high;
+            }
+		}
+	}
+    
+    int getType() const { return _type; }
+    float getRes() const { return _res; }
+    void setType(int type)
+    {
+        _type = type;
+        switch (type)
+        {
+            case kLowpass:
+                _out = &_low;
+                break;
+            case kHighpass:
+                _out = &_high;
+                break;
+            case kBandpass:
+                _out = &_band;
+                break;
+            case kNotch:
+                _out = &_notch;
+                break;
+        }
+    }
+    
+    void setFreq(float freq)
+    {
+        _freq = freq;
+        _updateCoefficient();
+    }
+    
+    void setRes(float res)
+    {
+        _res = res;
+        _updateQ();
+    }
+    
+    void setSampleRate(float sr)
+    {
+        _sr = sr;
+    }
+    
+    void reset()
+    {
+        _low = _high = _band = _notch = 0.f;
+    }
 
+	
+	void SetInput(AudioClient* in)
+	{
+		fInput = in;
+	}
+	
+private:
+	AudioClient* fInput;
+    void _updateCoefficient()
+    {
+        _f = 2 * sinf(3.141593f * _freqZ / _sr);
+    }
+    
+    void _updateQ()
+    {
+        _q = 2 - 2 * _res;
+    }
+    
+    float _sr;
+    float _freq;
+    float _freqZ;
+    float _res;
+    float _q;
+    float _f;
+    
+    int _type;
+    float _low;
+    float _high;
+    float _band;
+    float _notch;
+    
+    float* _out;
+};
 
 #endif
