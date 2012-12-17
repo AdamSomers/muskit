@@ -4,7 +4,7 @@
 #include <cmath>
 #include <cstdlib>
 #include <queue>
-#include <pthread.h>
+#include <atomic>
 
 #include "AudioClient.h"
 #include "AudioServer.h"
@@ -92,13 +92,12 @@ public:
    , fMinSample(0.f)
    , fMaxSample(0.f)
    , fCount(0)
+   , fThePeakBuffer(&fPeakBuffer)
 	{
-      pthread_mutex_init(&fLock, NULL);
 	}
    
    ~SampleAccumulator()
    {
-      pthread_mutex_destroy(&fLock);
    }
 	
 	void Render(float* buffer, int frames)
@@ -108,14 +107,12 @@ public:
          return;
 
       fInput->Process(buffer, frames);
-
+      PeakBuffer* peakBuffer = fThePeakBuffer.load();
 		for (int i = 0; i < frames; ++i)
 		{
          if (fCount >= (fSamplesPerPixel - 1))
          {
-            pthread_mutex_lock(&fLock);
-            fPeakBuffer.push_back(std::make_pair(fMaxSample, fMinSample));
-            pthread_mutex_unlock(&fLock);
+            peakBuffer->push_back(std::make_pair(fMaxSample, fMinSample));
             fMinSample = buffer[i];
             fMaxSample = buffer[i];
             fCount = 0;
@@ -141,10 +138,19 @@ public:
    PeakBuffer Get()
    {
       PeakBuffer samples;
-      pthread_mutex_lock(&fLock);
-      samples = fPeakBuffer;
-      fPeakBuffer.clear();
-      pthread_mutex_unlock(&fLock);
+      if (fThePeakBuffer == &fPeakBuffer)
+      {
+         fThePeakBuffer = &fPeakBuffer2;
+         samples = fPeakBuffer;
+         fPeakBuffer.clear();
+
+      }
+      else
+      {
+         fThePeakBuffer = &fPeakBuffer;
+         samples = fPeakBuffer2;
+         fPeakBuffer2.clear();
+      }
       return samples;
    }
    
@@ -161,7 +167,8 @@ public:
 private:
    
    PeakBuffer fPeakBuffer;
-   pthread_mutex_t fLock;
+   PeakBuffer fPeakBuffer2;
+   std::atomic<PeakBuffer*> fThePeakBuffer;
    int fSamplesPerPixel;
    float fMinSample;
    float fMaxSample;
