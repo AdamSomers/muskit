@@ -121,7 +121,7 @@ void WindowFunction::_generateWindowTables()
 		case kHamming:
 			{
 				 for (unsigned int j = 0; j < _windowSize; j++) {
-					gWindowTables[i][j] = 0.53836 - 0.46164 * cos((2 * PI * j)/(float)(_windowSize - 1));
+					gWindowTables[i][j] = 0.53836 - 0.46164 * cos((2 * MusKit::PI * j)/(float)(_windowSize - 1));
 				}	
 			}
 			break;
@@ -137,7 +137,7 @@ void WindowFunction::_generateWindowTables()
 		case kHann:
 			{
 				 for (unsigned int j = 0; j < _windowSize; j++) {
-					gWindowTables[i][j] = 0.5 * (1 - cos(2 * PI * j / (float)(_windowSize - 1)));
+					gWindowTables[i][j] = 0.5 * (1 - cos(2 * MusKit::PI * j / (float)(_windowSize - 1)));
 				}	
 			}
 			break;
@@ -147,7 +147,7 @@ void WindowFunction::_generateWindowTables()
 				float a1 = 0.5;
 				float a2 = 0.08;
 				for (unsigned int j = 0; j < _windowSize; j++) {
-					gWindowTables[i][j] = a0 - a1 * cos((2 * PI * j) / (_windowSize - 1)) + a2 * cos((4 * PI * j) / (_windowSize - 1));
+					gWindowTables[i][j] = a0 - a1 * cos((2 * MusKit::PI * j) / (_windowSize - 1)) + a2 * cos((4 * MusKit::PI * j) / (_windowSize - 1));
 				}	
 			}
 			break;		

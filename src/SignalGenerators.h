@@ -35,7 +35,7 @@ public:
 			float R1 = (float) rand() / (float) RAND_MAX;
 			float R2 = (float) rand() / (float) RAND_MAX;
 			
-			buffer[i] = tanh((float) sqrt( -2.0f * log( R1 )) * cos( 2.0f * PI * R2 ));
+			buffer[i] = tanh((float) sqrt( -2.0f * log( R1 )) * cos( 2.0f * MusKit::PI * R2 ));
 		}
 	}
 	
@@ -154,6 +154,11 @@ public:
       return samples;
    }
    
+   int GetSize() const
+   {
+      return fThePeakBuffer.load()->size();
+   }
+    
    void SetInput(AudioClient* input)
    {
       fInput = input;
@@ -248,9 +253,9 @@ public:
 		{
 			buffer[i] = fGainZ * sin(fPhase);
 			
-			fPhase += fFreq * (2*PI / fs);
-			if (fPhase >= 2*PI)
-				fPhase -= 2*PI;
+			fPhase += fFreq * (2*MusKit::PI / fs);
+			if (fPhase >= 2*MusKit::PI)
+				fPhase -= 2*MusKit::PI;
          
             float a1 = exp(-(1/fs)/(1/6.91));
          fFreqZ = fFreq * (1-a1) + a1 * fFreqZ;
@@ -293,9 +298,9 @@ public:
 		{
 			buffer[i] = fGainZ * sin(fPhase + modBuffer[i]);
 			
-         fPhase += fFreqZ * (2*PI / fs);
-			if (fPhase >= 2*PI)
-				fPhase -= 2*PI;
+         fPhase += fFreqZ * (2*MusKit::PI / fs);
+			if (fPhase >= 2*MusKit::PI)
+				fPhase -= 2*MusKit::PI;
          
          fFreqZ = fFreqZ * 0.999 + fFreq * 0.001;
          fGainZ = fGainZ * 0.999 + fGain * 0.001;
@@ -512,7 +517,7 @@ public:
       
       for (int i = 0; i < tableSize; ++i)
       {
-         fLookupTable[i] = sin(2*PI*(i/(double)tableSize));
+         fLookupTable[i] = sin(2*MusKit::PI*(i/(double)tableSize));
       }
       
       this->SetFreq(freq);

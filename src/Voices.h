@@ -106,7 +106,7 @@ public:
          float R1 = (float) rand() / (float) RAND_MAX;
          float R2 = (float) rand() / (float) RAND_MAX;
          
-         fBuffer[(fR + i) & (fMaxSize - 1)] = tanh((float) sqrt( -2.0f * log( R1 )) * cos( 2.0f * PI * R2 ));
+         fBuffer[(fR + i) & (fMaxSize - 1)] = tanh((float) sqrt( -2.0f * log( R1 )) * cos( 2.0f * MusKit::PI * R2 ));
       }
    }
    
@@ -135,7 +135,7 @@ public:
             float R1 = (float) rand() / (float) RAND_MAX;
             float R2 = (float) rand() / (float) RAND_MAX;
             
-            float randVal = tanh((float) sqrt( -2.0f * log( R1 )) * cos( 2.0f * PI * R2 ));
+            float randVal = tanh((float) sqrt( -2.0f * log( R1 )) * cos( 2.0f * MusKit::PI * R2 ));
             
             float index = (i / (float)fBufferSize) * bufferSize;
             float val = jake.Interpolate(buffer, index, bufferSize);
