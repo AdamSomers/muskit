@@ -5,7 +5,8 @@
 #include "MathHelpers.h"
 #include "AudioServer.h"
 #include "Interpolators.h"
-
+#include <cmath>
+#include <cassert>
 // Karplus
 // ----------------
 /// \brief Karplus-Strong string model
