@@ -20,6 +20,27 @@ AudioServer::~AudioServer()
 	fChannelClientMap.clear();
 }
 
+void AudioServer::AudioServerCallback(const float** inBuffer, float** outBuffer, unsigned frames)
+{
+    float inputBuffer[frames * fInputChannels];
+    memset(inputBuffer, 0, frames * fInputChannels * sizeof(float));
+    float outputBuffer[frames * fOutputChannels];
+    memset(outputBuffer, 0, frames * fInputChannels * sizeof(float));
+    int i = 0;
+    for (int c = 0; c < fInputChannels; ++c)
+    {
+        for (int s = 0; s < frames; ++s)
+            inputBuffer[i++] = inBuffer[c][s];
+    }
+    AudioServerCallback(inputBuffer, outputBuffer, frames);
+    i = 0;
+    for (int c = 0; c < fOutputChannels; ++c)
+    {
+        for (int s = 0; s < frames; ++s)
+            outBuffer[c][s] = outputBuffer[i++];
+    }
+}
+
 void AudioServer::AudioServerCallback(float* inBuffer, float* outBuffer, unsigned frames)
 {
 	pthread_mutex_lock(&fLock);

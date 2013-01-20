@@ -39,7 +39,8 @@ public:
 	
 	// !!! need to extend for multi-channel after it works
 	void AudioServerCallback(float* inBuffer, float* outBuffer, unsigned frames);
-	
+	void AudioServerCallback(const float** inBuffer, float** outBuffer, unsigned frames);
+    
 	void GetInput(float* buffer, int frames, int channel);
 	
    /// Call this to connect AudioClients to the DAC
