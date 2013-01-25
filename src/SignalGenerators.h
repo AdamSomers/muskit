@@ -738,7 +738,7 @@ public:
                     _freqZ = 0.9999 * _freqZ + 0.0001 * _freq;
                     _updateCoefficient();
                 }
-                buffer[i] = _high;
+                buffer[i] = *_out;
             }
 		}
 	}
