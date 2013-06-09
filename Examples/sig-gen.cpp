@@ -5,22 +5,21 @@
 
 int main(int argc, const char** argv)
 {
+   // initialize audio
    RtAudioDriver driver;
-   WavetableOsc w(50, 1.f, 64);
-   SinOsc s(80);
-   Multiplier m1(&w, NULL, 0.5);
-   Multiplier m2(&s, NULL, 0.5);
-   AudioServer::GetInstance()->AddClient(&m1, 0);
-   AudioServer::GetInstance()->AddClient(&m1, 1);
-   
-   int interpolationType = Interpolator::kInterpolationTypeNone;
+
+   // instantiate sine oscillator
+   SinOsc s(440);
+
+   // Attenuate by half
+   Multiplier m(&s, NULL, 0.5);
+
+   // Connect to left and right channels
+   AudioServer::GetInstance()->AddClient(&m, 0);
+   AudioServer::GetInstance()->AddClient(&m, 1);
    for (;;)
    {
       sleep(1);
-      s.SetFreq(s.Freq());
-      w.SetFreq(w.Freq());
-      w.SetInterpolationType(interpolationType);
-      interpolationType = (interpolationType + 1) % Interpolator::kNumInterpolationTypes;  
    }
    
    return 0;

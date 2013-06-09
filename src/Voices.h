@@ -47,6 +47,11 @@ public:
          ++fTotalRendered;
       }
    }
+
+   void NoteOn(int note, int velocity)
+   {
+      NoteOn(note, velocity, NULL, 0);
+   }
    
    void NoteOn(int note, int velocity, float* buffer = NULL, int bufferSize = 0)
    {

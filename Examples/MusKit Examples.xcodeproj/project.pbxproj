@@ -101,7 +101,7 @@
 		66C4D1F210D8714300E3E312 /* Poly.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Poly.h; sourceTree = "<group>"; };
 		66C4D1F310D8714300E3E312 /* SignalGenerators.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignalGenerators.h; sourceTree = "<group>"; };
 		66C4D1F410D8714300E3E312 /* TypingKeyboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TypingKeyboard.h; sourceTree = "<group>"; };
-		66C4D1F510D8714300E3E312 /* Voices.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Voices.h; sourceTree = "<group>"; };
+		66C4D1F510D8714300E3E312 /* Voices.h */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 3; lastKnownFileType = sourcecode.c.h; path = Voices.h; sourceTree = "<group>"; tabWidth = 3; };
 		66C4D1F610D8714300E3E312 /* WindowFunction.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = WindowFunction.cpp; sourceTree = "<group>"; };
 		66C4D1F710D8714300E3E312 /* WindowFunction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WindowFunction.h; sourceTree = "<group>"; };
 		66C4D1F910D8714300E3E312 /* chuck_fft.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = chuck_fft.c; sourceTree = "<group>"; };
@@ -390,8 +390,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
+				CLANG_CXX_LIBRARY = "libc++";
 				COPY_PHASE_STRIP = NO;
 				DSTROOT = "/tmp/$(PRODUCT_NAME).dst";
+				GCC_C_LANGUAGE_STANDARD = c11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_MODEL_TUNING = G5;
@@ -409,8 +412,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
+				CLANG_CXX_LIBRARY = "libc++";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DSTROOT = "/tmp/$(PRODUCT_NAME).dst";
+				GCC_C_LANGUAGE_STANDARD = c11;
 				GCC_MODEL_TUNING = G5;
 				INSTALL_PATH = /usr/local/bin;
 				PRODUCT_NAME = "sig-gen";
@@ -459,8 +465,11 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
+				CLANG_CXX_LIBRARY = "libc++";
 				COPY_PHASE_STRIP = NO;
 				DSTROOT = "/tmp/$(PRODUCT_NAME).dst";
+				GCC_C_LANGUAGE_STANDARD = c11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_MODEL_TUNING = G5;
@@ -480,8 +489,11 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
+				CLANG_CXX_LIBRARY = "libc++";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DSTROOT = "/tmp/$(PRODUCT_NAME).dst";
+				GCC_C_LANGUAGE_STANDARD = c11;
 				GCC_MODEL_TUNING = G5;
 				INSTALL_PATH = /usr/local/bin;
 				PRODUCT_NAME = fm;
@@ -493,8 +505,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
+				CLANG_CXX_LIBRARY = "libc++";
 				COPY_PHASE_STRIP = NO;
 				DSTROOT = "/tmp/$(PRODUCT_NAME).dst";
+				GCC_C_LANGUAGE_STANDARD = c11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_MODEL_TUNING = G5;
@@ -512,8 +527,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
+				CLANG_CXX_LIBRARY = "libc++";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DSTROOT = "/tmp/$(PRODUCT_NAME).dst";
+				GCC_C_LANGUAGE_STANDARD = c11;
 				GCC_MODEL_TUNING = G5;
 				INSTALL_PATH = /usr/local/bin;
 				PRODUCT_NAME = plucky;

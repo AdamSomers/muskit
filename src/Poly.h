@@ -61,7 +61,7 @@ protected:
 //
 //
 class Poly : public AudioClient
-           //, public MidiClient
+           , public MidiClient
 {
 public:
 	Poly() {}
