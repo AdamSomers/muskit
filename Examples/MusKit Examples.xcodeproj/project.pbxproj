@@ -13,6 +13,9 @@
 		666D9928138154D50005FC5E /* Interpolators.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 666D9927138154D50005FC5E /* Interpolators.cpp */; };
 		666D9929138154D50005FC5E /* Interpolators.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 666D9927138154D50005FC5E /* Interpolators.cpp */; };
 		666D992A138154D50005FC5E /* Interpolators.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 666D9927138154D50005FC5E /* Interpolators.cpp */; };
+		66B48D0B1774EF0C00141081 /* MidiServer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 66B48D0A1774EF0C00141081 /* MidiServer.cpp */; };
+		66B48D0C1774EF0C00141081 /* MidiServer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 66B48D0A1774EF0C00141081 /* MidiServer.cpp */; };
+		66B48D0D1774EF0C00141081 /* MidiServer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 66B48D0A1774EF0C00141081 /* MidiServer.cpp */; };
 		66C4D22210D8714300E3E312 /* AudioClient.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 66C4D1EA10D8714300E3E312 /* AudioClient.cpp */; };
 		66C4D22310D8714300E3E312 /* AudioServer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 66C4D1EC10D8714300E3E312 /* AudioServer.cpp */; };
 		66C4D22410D8714300E3E312 /* ParameterAPI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 66C4D1F010D8714300E3E312 /* ParameterAPI.cpp */; };
@@ -90,6 +93,7 @@
 		662AF9CB13877F5B00EC3930 /* Waveshaper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Waveshaper.h; sourceTree = "<group>"; };
 		666D9926138154D50005FC5E /* Interpolators.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Interpolators.h; sourceTree = "<group>"; };
 		666D9927138154D50005FC5E /* Interpolators.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Interpolators.cpp; sourceTree = "<group>"; };
+		66B48D0A1774EF0C00141081 /* MidiServer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MidiServer.cpp; sourceTree = "<group>"; };
 		66C4D1EA10D8714300E3E312 /* AudioClient.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AudioClient.cpp; sourceTree = "<group>"; };
 		66C4D1EB10D8714300E3E312 /* AudioClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioClient.h; sourceTree = "<group>"; };
 		66C4D1EC10D8714300E3E312 /* AudioServer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AudioServer.cpp; sourceTree = "<group>"; };
@@ -198,6 +202,7 @@
 				66C4D1ED10D8714300E3E312 /* AudioServer.h */,
 				66C4D1EE10D8714300E3E312 /* MathHelpers.h */,
 				66C4D1EF10D8714300E3E312 /* MidiServer.h */,
+				66B48D0A1774EF0C00141081 /* MidiServer.cpp */,
 				66C4D1F010D8714300E3E312 /* ParameterAPI.cpp */,
 				66C4D1F110D8714300E3E312 /* ParameterAPI.h */,
 				66C4D1F210D8714300E3E312 /* Poly.h */,
@@ -346,6 +351,7 @@
 				66C4D46010D8775E00E3E312 /* fm.cpp in Sources */,
 				666D992A138154D50005FC5E /* Interpolators.cpp in Sources */,
 				662AF9CD13877F5B00EC3930 /* Waveshaper.cpp in Sources */,
+				66B48D0C1774EF0C00141081 /* MidiServer.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -363,6 +369,7 @@
 				66C4D4BE10D87AA800E3E312 /* plucky.cpp in Sources */,
 				666D9928138154D50005FC5E /* Interpolators.cpp in Sources */,
 				662AF9CE13877F5B00EC3930 /* Waveshaper.cpp in Sources */,
+				66B48D0D1774EF0C00141081 /* MidiServer.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -380,6 +387,7 @@
 				66C4D23810D8714300E3E312 /* RtMidi.cpp in Sources */,
 				666D9929138154D50005FC5E /* Interpolators.cpp in Sources */,
 				662AF9CC13877F5B00EC3930 /* Waveshaper.cpp in Sources */,
+				66B48D0B1774EF0C00141081 /* MidiServer.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

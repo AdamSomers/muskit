@@ -2,7 +2,7 @@
 #define h_Poly
 
 #include "AudioClient.h"
-//#include "MidiServer.h"
+#include "MidiServer.h"
 #include <deque>
 #include <map>
 

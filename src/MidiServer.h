@@ -111,8 +111,6 @@ private:
 	MidiClientList fClients;
 };
 
-MidiServer* MidiServer::sInstance = NULL;
-
 // RtMidiDriver
 // ----------------
 /// \brief RtMidiDriver is a wrapper for RtMidi.  It passes callbacks along
