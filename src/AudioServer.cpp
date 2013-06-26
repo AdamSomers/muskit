@@ -12,7 +12,6 @@ AudioServer::AudioServer()
 , fInputChannels(1)
 , fOutputChannels(1)
 {
-	pthread_mutex_init(&fLock, NULL);
 }
 
 AudioServer::~AudioServer()
@@ -43,7 +42,7 @@ void AudioServer::AudioServerCallback(const float** inBuffer, float** outBuffer,
 
 void AudioServer::AudioServerCallback(float* inBuffer, float* outBuffer, unsigned frames)
 {
-	pthread_mutex_lock(&fLock);
+	fLock.lock();
 	float* buffer = (float*)outBuffer;
 	float tmp[frames];
 	
@@ -95,18 +94,18 @@ void AudioServer::AudioServerCallback(float* inBuffer, float* outBuffer, unsigne
 	}
 	
 	fTime += frames;
-	pthread_mutex_unlock(&fLock);
+	fLock.unlock();
 }
 
 void AudioServer::GetInput(float* buffer, int frames, int channel)
 {
-	//pthread_mutex_lock(&fLock);
+	//fLock.lock();
 	assert(channel < fInputChannels);
 	for (int i = 0; i < frames; ++i)
 	{
 		buffer[i] = fInputBuffer[i + frames * channel];
 	}
-	//pthread_mutex_unlock(&fLock);
+	//fLock.unLock();
 }
 
 void AudioServer::AddClient(AudioClient* c, int channelIndex)

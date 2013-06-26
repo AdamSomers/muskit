@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include <map>
-#include <pthread.h>
+#include <mutex>
 
 #include "RtAudio.h"
 
@@ -62,8 +62,8 @@ public:
 	
 	unsigned Time() const;
    
-   void EnterLock() { pthread_mutex_lock(&fLock); }
-   void ExitLock() { pthread_mutex_unlock(&fLock); }
+   void EnterLock() { fLock.lock(); }
+   void ExitLock() { fLock.unlock(); }
 	
 private:
 	static AudioServer* sInstance;
@@ -80,7 +80,7 @@ private:
 	
 	unsigned fTime;
 	
-	pthread_mutex_t fLock;
+    std::mutex fLock;
 };
 
 // RtAudioDriver
