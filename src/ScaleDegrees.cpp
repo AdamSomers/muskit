@@ -1,4 +1,5 @@
 #include "ScaleDegrees.h"
+#include <string>
 
 std::map<std::string, int> ScaleDegrees::scaleDegreesMap;
 

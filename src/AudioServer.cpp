@@ -21,9 +21,9 @@ AudioServer::~AudioServer()
 
 void AudioServer::AudioServerCallback(const float** inBuffer, float** outBuffer, unsigned frames)
 {
-    float inputBuffer[frames * fInputChannels];
+    float* inputBuffer = new float[frames * fInputChannels];
     memset(inputBuffer, 0, frames * fInputChannels * sizeof(float));
-    float outputBuffer[frames * fOutputChannels];
+    float* outputBuffer = new float[frames * fOutputChannels];
     memset(outputBuffer, 0, frames * fInputChannels * sizeof(float));
     int i = 0;
     for (int c = 0; c < fInputChannels; ++c)
@@ -38,13 +38,16 @@ void AudioServer::AudioServerCallback(const float** inBuffer, float** outBuffer,
         for (int s = 0; s < frames; ++s)
             outBuffer[c][s] = outputBuffer[i++];
     }
+
+    delete[] inputBuffer;
+    delete[] outputBuffer;
 }
 
 void AudioServer::AudioServerCallback(float* inBuffer, float* outBuffer, unsigned frames)
 {
 	fLock.lock();
 	float* buffer = (float*)outBuffer;
-	float tmp[frames];
+	float* tmp = new float[frames];
 	
 	if (fInputBuffer)
 	{
@@ -95,6 +98,8 @@ void AudioServer::AudioServerCallback(float* inBuffer, float* outBuffer, unsigne
 	
 	fTime += frames;
 	fLock.unlock();
+
+   delete[] tmp;
 }
 
 void AudioServer::GetInput(float* buffer, int frames, int channel)
@@ -113,7 +118,7 @@ void AudioServer::AddClient(AudioClient* c, int channelIndex)
 	ChannelClientMap::iterator clientListIter = fChannelClientMap.find(channelIndex);
 	if (clientListIter == fChannelClientMap.end())
 	{
-		fChannelClientMap.insert(std::make_pair<int, AudioClientList>((int)channelIndex, AudioClientList()));
+		fChannelClientMap.insert(std::make_pair(channelIndex, AudioClientList()));
 		clientListIter = fChannelClientMap.find(channelIndex);
 	}
 	

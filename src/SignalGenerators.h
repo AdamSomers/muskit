@@ -66,12 +66,13 @@ public:
 	
 	void Render(float* buffer, int frames)
 	{
-		float inputBuffer[frames];
+		float* inputBuffer = new float[frames];
 		AudioServer::GetInstance()->GetInput(inputBuffer, frames, fChannel);
 		for (int i = 0; i < frames; ++i)
 		{
 			buffer[i] = inputBuffer[i];
 		}
+      delete[] inputBuffer;
 	}
 	
 private:
@@ -137,20 +138,22 @@ public:
    
    PeakBuffer Get()
    {
+      AudioServer::GetInstance()->EnterLock();
       PeakBuffer samples;
       if (fThePeakBuffer == &fPeakBuffer)
       {
          fThePeakBuffer = &fPeakBuffer2;
-         samples = fPeakBuffer;
+         samples = PeakBuffer(fPeakBuffer);
          fPeakBuffer.clear();
 
       }
       else
       {
          fThePeakBuffer = &fPeakBuffer;
-         samples = fPeakBuffer2;
+         samples = PeakBuffer(fPeakBuffer2);
          fPeakBuffer2.clear();
       }
+      AudioServer::GetInstance()->ExitLock();
       return samples;
    }
    
@@ -291,7 +294,7 @@ public:
 		const float fs = AudioServer::GetInstance()->Fs();
 		const int period = 1.f / fFreqZ * fs;
 		
-      float modBuffer[frames];
+      float* modBuffer = new float[frames];
       fModOsc->Render(modBuffer, frames);
       
 		for (int i = 0; i < frames; ++i)
@@ -305,6 +308,7 @@ public:
          fFreqZ = fFreqZ * 0.999 + fFreq * 0.001;
          fGainZ = fGainZ * 0.999 + fGain * 0.001;
 		}
+      delete[] modBuffer;
 	}
    
    void SetModIndex(float index)
@@ -466,7 +470,7 @@ public:
 	
 	void Render(float* buffer, int frames)
 	{
-		float tmp[frames];
+		float* tmp = new float[frames];
 		
 		std::vector<SinOsc*>::iterator i;
 		for (i = fSinOscs.begin(); i != fSinOscs.end(); ++i)
@@ -480,6 +484,7 @@ public:
 				buffer[j] += tmp[j];
 			}
 		}
+      delete[] tmp;
 	}
 	
 	void SetFreq(float freq)
@@ -593,12 +598,13 @@ public:
 			}
 			else
 			{
-				float tmp[frames];
+				float* tmp = new float[frames];
 				fB->Process(tmp, frames);
 				for (int i = 0; i < frames; ++i)
 				{
 					buffer[i] *= tmp[i];
 				}
+            delete[] tmp;
 			}
 		}
 	}
@@ -640,7 +646,7 @@ public:
 	
 	void Render(float* buffer, int frames)
 	{
-		float tmp[frames];
+		float* tmp = new float[frames];
 		memset(tmp, 0.f, frames * sizeof(float));
 		
 		std::vector<AudioClient*>::iterator i;
@@ -657,6 +663,7 @@ public:
 		{
 			buffer[i] = tmp[i] + fConst;
 		}
+      delete[] tmp;
 	}
 	
 	void SetVal(float val)

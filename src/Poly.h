@@ -80,7 +80,7 @@ public:
 	
 	void Render(float* buffer, int frames)
 	{
-		float tmp[frames];
+		float* tmp = new float[frames];
 		memset(tmp, 0.f, frames * sizeof(float));
 		
 		std::deque<Voice*>::iterator i;
@@ -100,6 +100,8 @@ public:
 		{
 			buffer[i] = tmp[i];
 		}
+
+      delete[] tmp;
 	}
 	
 	void NoteOn(int note, int velocity)
