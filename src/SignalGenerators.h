@@ -580,6 +580,7 @@ public:
 	: fA(a)
 	, fB(b)
 	, fConst(constVal)
+    , fConstZ(constVal)
 	{
 	}
 	
@@ -593,7 +594,8 @@ public:
 			{
 				for (int i = 0; i < frames; ++i)
 				{
-					buffer[i] *= fConst;
+                    fConstZ = fConst * 0.01 + fConstZ * 0.99;
+					buffer[i] *= fConstZ;
 				}
 			}
 			else
@@ -604,7 +606,7 @@ public:
 				{
 					buffer[i] *= tmp[i];
 				}
-            delete[] tmp;
+                delete[] tmp;
 			}
 		}
 	}
@@ -628,6 +630,7 @@ private:
 	AudioClient* fA;
 	AudioClient* fB;
 	float fConst;
+    float fConstZ;
 };
 
 // Adder
