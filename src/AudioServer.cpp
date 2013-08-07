@@ -17,6 +17,10 @@ AudioServer::AudioServer()
 AudioServer::~AudioServer()
 {
 	fChannelClientMap.clear();
+    if (fInputBuffer)
+	{
+		delete[] fInputBuffer;
+	}
 }
 
 void AudioServer::AudioServerCallback(const float** inBuffer, float** outBuffer, unsigned frames)

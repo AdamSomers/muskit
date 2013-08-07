@@ -36,6 +36,12 @@ public:
 		}
 		return sInstance;
 	}
+
+    static void Destruct()
+	{
+		if (sInstance)
+            delete sInstance;
+	}
 	
 	// !!! need to extend for multi-channel after it works
 	void AudioServerCallback(float* inBuffer, float* outBuffer, unsigned frames);
