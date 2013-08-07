@@ -8,6 +8,12 @@ AudioClient::AudioClient()
 {
 }
 
+AudioClient::~AudioClient()
+{
+    if (fCachedBuffer)
+        delete[] fCachedBuffer;
+}
+
 void AudioClient::Process(float* buffer, int frames)
 {
 	if (!fCachedBuffer)

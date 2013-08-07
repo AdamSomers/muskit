@@ -20,6 +20,7 @@ class AudioClient
 {
 public:
 	AudioClient();
+    ~AudioClient();
 	
 	// Subclasses must override this
 	virtual void Render(float* buffer, int frames) = 0;
